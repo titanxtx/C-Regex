@@ -260,7 +260,7 @@ Example with flags:
 ```
 
 ## Compilation
-A make file can be made for this. Here is a terminal command you can use if you want. -c is used to compile everything initially separately. Then after we link everything together with the -lstdc++ library.
+A makefile can be made for this. Here is a terminal command you can use if you want. -c is used to compile everything initially separately. Then after we link everything together with the -lstdc++ library.
 ```
 gcc-8 -O3 -c reg.c -o reg.o && g++-8 -O3 -std=c++17 -c regex_master.cpp -o regex_master.o  &&gcc-8 regex_master.o reg.o -O3 -std=c++17 -o test.out -lstdc++ && ./test.out
 
