@@ -56,6 +56,17 @@ int main(){
             printf("start:%d  end:%d\n\n",mz[w].x[w2].start,mz[w].x[w2].end);
         }
     }
+    
+    int sizex;
+    char u[]=".*?(\\w+).*?(\\w+).*?";
+
+    struct regex_str *k=regex_match0(s,u,&sizex);
+    printf("sizex:%d\n",sizex);
+    for(int x=0;x<sizex;x++)
+    {
+        printf("match#%d\nstring: %s\n\n",x,k[x].str);
+    }
+    
     if(regex_contains0(s,reg))
     {
         printf("TRUE: Contains the regex\n");
