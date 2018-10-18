@@ -9,39 +9,10 @@ Remember to use the free() function in C to free the strings and structures or e
 The numbers after the function indicate what kind of flags it accepts in what order\
 0 - no flags\
 1 - match flags\
-2 - syntax flags then match flags
+2 - syntax flags then match flags\
 3 - syntax flags
-Flags:
-```
-    //mflags
-    const int r_match_default=0;
-    const int r_match_not_bol=1;
-    const int r_match_not_eol=2;
-    const int r_match_not_bow=3;
-    const int r_match_not_eow=4;
-    const int r_match_any=5;
-    const int r_match_not_null=6;
-    const int r_match_continuous=7;
-    const int r_match_prev_avail=8;
-    const int r_format_default=9;
-    const int r_format_sed=10;
-    const int r_format_no_copy=11;
-    const int r_format_first_only=12;
-    
-    //sflags
-    const int r_icase=0;
-    const int r_nosubs=1;
-    const int r_optimize=2;
-    const int r_collate=3;
-    const int r_ECMAScript=4;
-    const int r_basic=5;
-    const int r_extended=6;
-    const int r_awk=7;
-    const int r_grep=8;
-    const int r_egrep=9;
-```
 
-The flags are constants. The functions accept integer arrays of these flags. In the integer arrays you can place the flags in any order
+Structures and Functions:
 ```
     struct regex_str{
         char*str;
@@ -246,6 +217,48 @@ string: This
 match#2
 string: is
 ```
+## Flags
+```
+    //mflags
+    const int r_match_default=0;
+    const int r_match_not_bol=1;
+    const int r_match_not_eol=2;
+    const int r_match_not_bow=3;
+    const int r_match_not_eow=4;
+    const int r_match_any=5;
+    const int r_match_not_null=6;
+    const int r_match_continuous=7;
+    const int r_match_prev_avail=8;
+    const int r_format_default=9;
+    const int r_format_sed=10;
+    const int r_format_no_copy=11;
+    const int r_format_first_only=12;
+    
+    //sflags
+    const int r_icase=0;
+    const int r_nosubs=1;
+    const int r_optimize=2;
+    const int r_collate=3;
+    const int r_ECMAScript=4;
+    const int r_basic=5;
+    const int r_extended=6;
+    const int r_awk=7;
+    const int r_grep=8;
+    const int r_egrep=9;
+```
+
+The flags are constants. The functions accept integer arrays of these flags. In the integer arrays you can place the flags in any order\
+Example with flags:
+```
+    char s[]="This is a test and only a test :)"; //string
+    char reg[]="(\\b)(\\w{2,4})(\\b)"; //regex string, you need to escape your backslashes
+    char rep[]="$1TEST$3"; //replacement string
+    
+    char *z=regex_replace2(s,reg,rep,(int[]){r_icase},1,(int[]){r_format_first_only},1);
+    char *m=regex_replace1(s,reg,rep,(int[]){r_format_first_only},1);
+    char *n=regex_replace0(s,reg,rep);
+```
+
 ## Compilation
 A make file can be made for this. Here is a terminal command you can use if you want. -c is used to compile everything initially separately. Then after we link everything together with the -lstdc++ library.
 ```
