@@ -3,7 +3,7 @@ Wrapped C++ regex for C. Easier interface than the original.
 
 This code was originaly written to work with Fortran. It was remodified without some of the boilerplate variables.
 
-Remember to use the free() function in C to free the strings and structures or else you'll get a memory leak.
+Remember to use the free() function in C to free the strings and structures or else you'll get a memory leak. Escape any backslashes you use in the regular expression strings.
 
 ## Functions
 The numbers after the function indicate what kind of flags it accepts in what order\
@@ -81,7 +81,7 @@ Replaces any regex match with the replacement string\
 Example:
 ```
 char z[]="testing 123 321 123";
-char e[]="\d+";
+char e[]="\\d+";
 char w[]="number";
 char *m=regex_replace0(z,e,w);
 ```
@@ -92,7 +92,7 @@ It returns true or false if the string matches the regular expression or not\
 Example:
 ```
 char z[]="testing 123 321 123";
-char e[]="\d+"
+char e[]="\\d+"
 bool g=regex_contains0(z,e);
 //or 
 if(regex_contains0(z,e))
@@ -111,7 +111,7 @@ It returns true or false if the regular expression matches the whole string or n
 Example:
 ```
 char z[]="testing 123 321 123";
-char e[]="\d+";
+char e[]="\\d+";
 bool g=regex_match_logical0(z,e);
 //or 
 if(regex_match_logical0(z,e))
@@ -130,7 +130,7 @@ Returns the index of the character array that is matched. If nothing is found th
 Example:
 ```
 char z[]="testing 123 321 123";
-char e[]="\d+";
+char e[]="\\d+";
 int t=regex_indexof0(z,e); //first occurance start index
 int t2=regex_indexofend0(z,e); //first occurance ending index
 int t3=regex_lastindexof0(z,e); //last occurance start index
