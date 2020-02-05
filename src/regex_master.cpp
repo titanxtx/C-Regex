@@ -24,14 +24,15 @@ SOFTWARE.
 #include "regex_master.h"
 
 //--------------------------------replace ------------------------------------------
-    char * regex_replace0(char*str,char *rgx,char *str_replace)
+//replaces text found with replacement string
+    char * regex_replace0(char*str,char *rgx,char *str_replace) //data text cstring, regex cstring, replacement cstring
     {
-        string rx(regex_replace(str,std::regex(rgx),str_replace));
+        string rx(regex_replace(str,std::regex(rgx),str_replace));//replaces with regex and replacements then converts to a string then back to a cstring then returns it
         char *cx=(char*)malloc((sizeof(char)*rx.length()+1));
         strcpy(cx,rx.c_str());
         return cx;
     }
-    char * regex_replace1(char*str,char *rgx,char *str_replace,int *mflags,int mflags_size)
+    char * regex_replace1(char*str,char *rgx,char *str_replace,int *mflags,int mflags_size)//uses the extra mflag options
     {
         string rx(regex_replace(str,std::regex(rgx),str_replace,rgx_flag_match(mflags,mflags_size)));
         char *cx=(char*)malloc((sizeof(char)*rx.length()+1));
@@ -53,6 +54,7 @@ SOFTWARE.
         return cx;
     }
 //------------------------------------------logical contains ---------------------------------------------------------------
+//tests to see if a regular expression matches and if it does boolean logic will be returned.
     bool regex_contains0(char*str,char*rgx)
     {
         std::cmatch cm;
@@ -96,6 +98,7 @@ SOFTWARE.
         return regex_match(str,cm,std::regex(rgx,rgx_flag_syntax(sflags,sflags_size)));
     }
 //--------------------------------------------indexof--------------------------------------------------------------------
+//When matched with a regular expression the first index is returned where it was found. If not found the return value is -1.
     int regex_indexof0(char*str,char*rgx)
     {
         std::cmatch cm;
@@ -129,6 +132,7 @@ SOFTWARE.
         return last;
     }
     //--------------------------------------------lastindexof-------------------------------------------
+//The last found index is returned where a regular expression match has been found. If no match is found then it is -1.
     int regex_lastindexof0(char*str,char*rgx)
     {
         std::regex e(rgx);
@@ -178,6 +182,7 @@ SOFTWARE.
         return last;
     }
     //--------------------------------------------indexofend-------------------------------------------------------------------
+//The last found index is returned where a regular expression match has been found. If no match is found then it is -1.
     int regex_indexofend0(char*str,char*rgx)
     {
         std::cmatch cm;
@@ -260,6 +265,7 @@ SOFTWARE.
         return last;
     }
 //--------------------------------------------------Search--------------------------------------------------------------
+//If found a data structure is returned with its content available to be used.
     struct regex_container* regex_search0(char*str,char*rgx,int*max_size)
     {
         char var[strlen(str)+1];
@@ -390,6 +396,7 @@ SOFTWARE.
     }
 
 //----------------------------------------------------------------------------------------------------------------
+//returns regex match
     struct regex_str* regex_match0(char*str,char*rgx,int*matchnum)
     {
         cmatch cm;
